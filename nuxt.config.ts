@@ -7,6 +7,7 @@ export default defineNuxtConfig({
   ssr: true,
 
   nitro: {
+    preset: "github_pages",
     prerender: {
       crawlLinks: true,
       routes: ["/", "/events"],
