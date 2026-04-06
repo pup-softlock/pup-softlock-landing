@@ -14,6 +14,7 @@ export default defineNuxtConfig({
   },
 
   app: {
+    baseURL: "/pup-softlock-landing/",
     head: {
       htmlAttrs: {
         lang: "en",
