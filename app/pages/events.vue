@@ -21,7 +21,7 @@ const events: EventItem[] = [
   {
     dates: "Apr 25",
     title: "Cage & Key 🏩",
-    location: "The Boots, Antwerp, Belgium 🇧🇪",
+    location: "La Réserve, Brussels, Belgium 🇧🇪",
   },
   {
     dates: "May 2",
