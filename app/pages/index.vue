@@ -1,6 +1,6 @@
 <script setup lang="ts">
 useSeoMeta({
-  title: "Pup Softlock",
+  title: "",
   description: "Horny locked puppy. Venlo, NL",
 });
 

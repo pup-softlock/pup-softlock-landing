@@ -7,13 +7,14 @@ useHead({
 
 useSeoMeta({
   titleTemplate: (titleChunk) =>
-    titleChunk ? `${titleChunk} · Pup Softlock` : "Pup Softlock",
+    titleChunk ? `${titleChunk} — Pup Softlock` : "Pup Softlock",
   ogType: "website",
   twitterCard: "summary_large_image",
 });
 </script>
 
 <template>
+  <!-- VERSION: 1.0.0 -->
   <NuxtRouteAnnouncer />
   <NuxtLoadingIndicator color="#8b5cf6" />
   <NuxtPage />
