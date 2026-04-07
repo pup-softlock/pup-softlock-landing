@@ -131,10 +131,10 @@ const events: EventItem[] = [
               <div class="event-copy">
                 <!-- <p class="event-date mb-2">{{ event.dates }}</p> -->
                 <h2 class="title is-5 mb-1">{{ event.title }}</h2>
-                <p class="mb-2 has-text-info-80">{{ event.location }}</p>
+                <p class="has-text-info-80">{{ event.location }}</p>
                 <p
                   v-if="event.note"
-                  class="small-note mb-0"
+                  class="small-note mb-0 mt-2"
                   v-html="event.note"
                 ></p>
               </div>

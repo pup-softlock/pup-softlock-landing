@@ -1,4 +1,6 @@
 <script setup lang="ts">
+import "~/assets/scss/main.scss";
+
 useHead({
   bodyAttrs: {
     class: "theme-dark",

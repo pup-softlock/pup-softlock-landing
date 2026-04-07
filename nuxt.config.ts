@@ -2,8 +2,6 @@
 export default defineNuxtConfig({
   modules: ["@nuxt/eslint", "@nuxt/a11y", "@nuxt/hints", "@nuxt/image"],
 
-  css: ["~/assets/scss/main.scss"],
-
   ssr: true,
 
   nitro: {

@@ -60,11 +60,22 @@ jobs:
           # You may remove this line if you want to manage the configuration yourself.
           static_site_generator: nuxt
       - name: Install dependencies
-        run: ${{ steps.detect-package-manager.outputs.manager }} ${{ steps.detect-package-manager.outputs.command }}
+        run: |
+          if [ "${{ steps.detect-package-manager.outputs.manager }}" = "npm" ]; then
+            npm ci --include=dev
+          else
+            ${{ steps.detect-package-manager.outputs.manager }} ${{ steps.detect-package-manager.outputs.command }}
+          fi
       - name: Clean previous build outputs
         run: rm -rf .nuxt .output dist
       - name: Static HTML export with Nuxt
         run: ${{ steps.detect-package-manager.outputs.manager }} run generate
+      - name: Verify generated CSS assets
+        run: |
+          ls -lah ./.output/public/_nuxt/*.css
+          grep -n 'rel="stylesheet"\|theme-color' ./.output/public/index.html
+      - name: Disable Jekyll processing
+        run: touch ./.output/public/.nojekyll
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v3
         with:
