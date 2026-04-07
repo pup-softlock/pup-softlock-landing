@@ -7,7 +7,6 @@ export default defineNuxtConfig({
   ssr: true,
 
   nitro: {
-    preset: "github_pages",
     prerender: {
       crawlLinks: true,
       routes: ["/", "/events"],
@@ -15,7 +14,6 @@ export default defineNuxtConfig({
   },
 
   app: {
-    baseURL: "/pup-softlock-landing/",
     head: {
       htmlAttrs: {
         lang: "en",
