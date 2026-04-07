@@ -14,8 +14,8 @@ useSeoMeta({
 </script>
 
 <template>
-  <!-- VERSION: 1.0.0 -->
   <NuxtRouteAnnouncer />
   <NuxtLoadingIndicator color="#8b5cf6" />
   <NuxtPage />
+  <div style="display: none" aria-role="presentation">VERSION: 1.0.1</div>
 </template>
