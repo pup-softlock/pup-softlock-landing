@@ -45,6 +45,7 @@ type EventItem = {
 };
 
 const viewMode = ref<"full" | "compact">("full");
+const expandedEventIndex = ref<number | null>(null);
 
 const events: EventItem[] = [
   {
@@ -177,6 +178,22 @@ const eventCards = computed(() =>
   }),
 );
 
+watch(viewMode, () => {
+  expandedEventIndex.value = null;
+});
+
+function isEventExpanded(index: number) {
+  return expandedEventIndex.value === index;
+}
+
+function toggleEventExpanded(index: number) {
+  if (viewMode.value !== "compact") {
+    return;
+  }
+
+  expandedEventIndex.value = expandedEventIndex.value === index ? null : index;
+}
+
 function dateMonth(date: EventItem["date"]) {
   return date.start.month;
 }
@@ -306,11 +323,20 @@ function compactLocation(location: string) {
         "
       >
         <article
-          v-for="event in eventCards"
+          v-for="(event, index) in eventCards"
           :key="event.key"
-          :class="viewMode === 'full' ? 'card event-card' : 'event-list-row'"
+          :class="[
+            viewMode === 'full' ? 'card event-card' : 'event-list-item',
+            {
+              'card event-card':
+                viewMode === 'compact' && isEventExpanded(index),
+            },
+          ]"
         >
-          <div v-if="viewMode === 'full'" class="card-content p-5">
+          <div
+            v-if="viewMode === 'full' || isEventExpanded(index)"
+            class="card-content p-5"
+          >
             <div class="event-layout">
               <div
                 class="event-date-badge"
@@ -363,10 +389,24 @@ function compactLocation(location: string) {
                   </dl>
                 </div>
               </div>
+
+              <button
+                v-if="viewMode === 'compact'"
+                type="button"
+                class="delete event-card-close"
+                aria-label="Collapse event details"
+                @click="toggleEventExpanded(index)"
+              ></button>
             </div>
           </div>
 
-          <template v-else>
+          <button
+            v-else
+            type="button"
+            class="event-list-row event-list-button"
+            :aria-expanded="isEventExpanded(index)"
+            @click="toggleEventExpanded(index)"
+          >
             <div class="event-list-copy">
               <h2 class="title is-6 mb-1">{{ event.title }}</h2>
               <p class="small-note mb-0">{{ event.compactLocation }}</p>
@@ -381,7 +421,7 @@ function compactLocation(location: string) {
             <div class="event-list-date event-compact-date">
               {{ event.dateLabel }}
             </div>
-          </template>
+          </button>
         </article>
       </div>
 
