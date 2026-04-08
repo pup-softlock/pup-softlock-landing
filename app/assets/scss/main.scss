@@ -128,14 +128,13 @@ h6 {
   min-width: 4.25rem;
   flex-direction: column;
   overflow: hidden;
-  // border: 1px solid rgba(148, 163, 184, 0.22);
   border-radius: 1rem;
-  // box-shadow: 0 8px 24px rgba(0, 0, 0, 0.22);
   flex-shrink: 0;
 }
 
 .event-date-month,
-.event-date-day {
+.event-date-day,
+.event-date-spillover {
   display: block;
   text-align: center;
 }
@@ -155,9 +154,24 @@ h6 {
   line-height: 1;
 }
 
+.event-date-badge.is-spillover .event-date-day {
+  padding-bottom: 0.45rem;
+}
+
+.event-date-spillover {
+  padding: 0.2rem 0.45rem 0.35rem;
+  background: rgba(139, 92, 246, 0.12);
+  color: #d8c7ff;
+  font-size: 0.62rem;
+  font-weight: 800;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
 .event-copy {
   min-width: 0;
   flex: 1;
+  align-self: center;
 }
 
 .event-date {
@@ -169,8 +183,30 @@ h6 {
   color: rgba(238, 242, 255, 0.72);
 }
 
-.event-copy {
-  align-self: center;
+.event-notes {
+  margin-top: 0.75rem;
+}
+
+.event-note-list {
+  display: grid;
+  gap: 0.5rem;
+  margin: 0;
+}
+
+.event-note-item {
+  display: grid;
+  // gap: 0.2rem;
+}
+
+.event-note-date {
+  width: fit-content;
+  padding: 0.1rem 0.5rem;
+  border-radius: 9999px;
+  background: rgba(125, 211, 252, 0.12);
+  color: #c9ecff;
+  font-size: 0.72rem;
+  font-weight: 700;
+  letter-spacing: 0.04em;
 }
 
 .tabs ul {

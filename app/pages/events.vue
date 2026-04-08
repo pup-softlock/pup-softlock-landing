@@ -5,11 +5,29 @@ useSeoMeta({
     "Where to find pup Softlock in the wild. Upcoming events, parties and socials.",
 });
 
+type EventDatePart = {
+  month: string;
+  day: number;
+};
+
+type EventDateRange =
+  | string
+  | {
+      start: EventDatePart;
+      end: EventDatePart;
+    };
+
+type EventNoteItem = {
+  title: string;
+  location?: string;
+  dates?: string;
+};
+
 type EventItem = {
-  dates: string;
+  dates: EventDateRange;
   title: string;
   location: string;
-  note?: string;
+  note?: string | EventNoteItem[];
 };
 
 const events: EventItem[] = [
@@ -43,11 +61,32 @@ const events: EventItem[] = [
     title: "Gear Factory 💶",
     location: "Grenswerk, Venlo, The Netherlands 🇳🇱",
   },
+  // {
+  //   dates: "Jun 27",
+  //   title: "Pride Maastricht OR Caged @ Eagle Amsterdam",
+  //   location: "🇳🇱",
+  // },
   {
-    dates: "Jul 3–5",
+    dates: {
+      start: { month: "Jul", day: 3 },
+      end: { month: "Jul", day: 5 },
+    },
     title: "Pride Festival Cologne (CSD) 🏩",
     location: "Cologne, Germany 🇩🇪",
-    note: "Play With GuyZ 💶,<br>Sexy Universe 💶,<br>Naughty 💶",
+    note: [
+      { title: "CSD Street Festival" },
+      { title: "Play With GuyZ 💶", dates: "Jul 3", location: "Schrotty" },
+      { title: "Sexy Universe 💶", dates: "Jul 4", location: "MMC Studios" },
+      { title: "Naughty 💶", dates: "Jul 5", location: "Nachtflug" },
+    ],
+  },
+  {
+    dates: {
+      start: { month: "Jul", day: 10 },
+      end: { month: "Jul", day: 12 },
+    },
+    title: "Pup Weekend",
+    location: "Amsterdam, The Netherlands 🇳🇱",
   },
   {
     dates: "Jul 18",
@@ -55,23 +94,98 @@ const events: EventItem[] = [
     location: "Solothurn, Switzerland 🇨🇭",
   },
   {
-    dates: "Jul",
-    title: "World Pride Amsterdam — ❔",
+    dates: {
+      start: { month: "Jul", day: 25 },
+      end: { month: "Aug", day: 8 },
+    },
+    title: "World Pride Amsterdam 🏩",
     location: "Amsterdam, The Netherlands 🇳🇱",
-    note: "Looking for ideas on what to do there",
+    note: [
+      { dates: "Jul 25", title: "Pride March & Pride Park" },
+      {
+        dates: "Jul 31, Aug 1",
+        title: "Pup Zone at Crash",
+        location: "Beursplein",
+      },
+      {
+        dates: "Aug 5–7",
+        title: "WorldPride Village (not sure about that one yet)",
+        location: "Museumplein",
+      },
+      { dates: "Aug 8", title: "World Puppy and Furry Walk" },
+    ],
   },
+  // {
+  //   dates: "Aug 8",
+  //   title: "Puppy Park",
+  //   location: "Mannheim, Germany 🇩🇪",
+  // },
   {
-    dates: "Aug 8",
-    title: "Puppy Park",
-    location: "Mannheim, Germany 🇩🇪",
-  },
-  {
-    dates: "Sep 4–14",
+    dates: {
+      start: { month: "Sep", day: 4 },
+      end: { month: "Sep", day: 14 },
+    },
     title: "Folsom Europe",
     location: "Berlin, Germany 🇩🇪",
-    note: "Animalz Folsom 2026 💶",
+    note: [
+      {
+        title: "Animalz Folsom 💶",
+        dates: "Sep 12",
+        location: "Metropol",
+      },
+      {
+        title: "I need ideas what else to do during that whole stay in Berlin",
+      },
+    ],
   },
 ];
+
+function dateMonth(dates: EventItem["dates"]) {
+  if (typeof dates === "string") {
+    return dates.split(" ")[0];
+  }
+
+  return dates.start.month;
+}
+
+function dateDays(dates: EventItem["dates"]) {
+  if (typeof dates === "string") {
+    return dates.split(" ")[1]?.replace(",", "") || "TBA";
+  }
+
+  if (
+    dates.start.day === dates.end.day &&
+    dates.start.month === dates.end.month
+  ) {
+    return `${dates.start.day}`;
+  }
+
+  return `${dates.start.day}–${dates.end.day}`;
+}
+
+function dateSpilloverMonth(dates: EventItem["dates"]) {
+  if (typeof dates === "string" || dates.start.month === dates.end.month) {
+    return null;
+  }
+
+  return dates.end.month;
+}
+
+function hasDateValue(dates: EventItem["dates"]) {
+  if (typeof dates === "string") {
+    return Boolean(dates.split(" ")[1]);
+  }
+
+  return true;
+}
+
+function dateKey(dates: EventItem["dates"]) {
+  if (typeof dates === "string") {
+    return dates;
+  }
+
+  return `${dates.start.month}-${dates.start.day}-${dates.end.month}-${dates.end.day}`;
+}
 </script>
 
 <template>
@@ -106,37 +220,66 @@ const events: EventItem[] = [
       <div class="is-flex is-flex-direction-column">
         <article
           v-for="event in events"
-          :key="`${event.dates}-${event.title}`"
+          :key="`${dateKey(event.dates)}-${event.title}`"
           class="card event-card"
         >
           <div class="card-content p-5">
             <div class="event-layout">
-              <div class="event-date-badge" aria-label="Event date">
+              <div
+                class="event-date-badge"
+                :class="{ 'is-spillover': dateSpilloverMonth(event.dates) }"
+                aria-label="Event date"
+              >
                 <span
                   class="event-date-month has-background-primary has-text-white"
                 >
-                  {{ event.dates.split(" ")[0] }}
+                  {{ dateMonth(event.dates) }}
                 </span>
                 <span
                   class="event-date-day has-background-light"
                   :class="{
-                    'has-text-grey-light is-size-6': !event.dates.split(' ')[1],
-                    'has-text-dark': event.dates.split(' ')[1],
+                    'has-text-grey-light is-size-6': !hasDateValue(event.dates),
+                    'has-text-dark': hasDateValue(event.dates),
                   }"
                 >
-                  {{ event.dates.split(" ")[1]?.replace(",", "") || "TBA" }}
+                  {{ dateDays(event.dates) }}
+                </span>
+                <span
+                  v-if="dateSpilloverMonth(event.dates)"
+                  class="event-date-spillover"
+                >
+                  ✸{{ dateSpilloverMonth(event.dates) }}
                 </span>
               </div>
 
               <div class="event-copy">
-                <!-- <p class="event-date mb-2">{{ event.dates }}</p> -->
                 <h2 class="title is-5 mb-1">{{ event.title }}</h2>
                 <p class="has-text-info-80">{{ event.location }}</p>
-                <p
-                  v-if="event.note"
-                  class="small-note mb-0 mt-2"
-                  v-html="event.note"
-                ></p>
+
+                <div v-if="event.note" class="event-notes mt-2">
+                  <dl v-if="Array.isArray(event.note)" class="event-note-list">
+                    <div
+                      v-for="item in event.note"
+                      :key="`${item.dates ?? 'note'}-${item.title}`"
+                      class="event-note-item"
+                    >
+                      <dt v-if="item.dates" class="event-note-date">
+                        {{ item.dates }}
+                      </dt>
+                      <dd class="small-note mb-0">
+                        {{ item.title
+                        }}<template v-if="item.location"
+                          >,
+                          <span class="has-text-info-80">{{
+                            item.location
+                          }}</span>
+                        </template>
+                      </dd>
+                    </div>
+                  </dl>
+
+                  <p v-else class="small-note mb-0">{{ event.note }}</p>
+                </div>
               </div>
             </div>
           </div>
