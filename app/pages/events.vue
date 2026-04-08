@@ -290,9 +290,17 @@ function dateKey(dates: EventItem["dates"]) {
         <p class="mb-0">DM on Instagram</p>
       </div> -->
 
-      <NuxtLink to="/" class="button is-text mt-3 pl-0"
-        >← Back to profile</NuxtLink
-      >
+      <div class="is-flex is-flex-direction-column mt-5">
+        <NuxtLink
+          to="/past-events"
+          class="button is-fullwidth is-text mb-0 is-medium"
+          >Past Events</NuxtLink
+        >
+
+        <NuxtLink to="/" class="button is-fullwidth is-text mt-3"
+          >← Back to profile</NuxtLink
+        >
+      </div>
     </div>
   </main>
 </template>
