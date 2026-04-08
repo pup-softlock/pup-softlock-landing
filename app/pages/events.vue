@@ -5,75 +5,91 @@ useSeoMeta({
     "Where to find pup Softlock in the wild. Upcoming events, parties and socials.",
 });
 
-type EventDatePart = {
+type EventDatePoint = {
+  /** Short English month label like `"Apr"` or `"Sep"`. */
   month: string;
-  day: number;
+  /** Optional for future or still-TBA entries that only have a month so far. */
+  day?: number;
 };
 
-type EventDateRange =
-  | string
-  | {
-      start: EventDatePart;
-      end: EventDatePart;
-    };
+type EventDate = {
+  /** Always present; for single-day events this is the only date point needed. */
+  start: EventDatePoint;
+  /** Add for multi-day or cross-month events. */
+  end?: EventDatePoint;
+};
 
-type EventNoteItem = {
+type EventDetail = {
+  /** Label for a sub-plan, meetup, party, or notable moment inside a bigger trip. */
   title: string;
+  /** Short venue/place label only, not a full city-country string. */
   location?: string;
+  /** Human-readable date text like `"Jul 31, Aug 1"` or `"Sep 12"`. */
   dates?: string;
 };
 
 type EventItem = {
-  dates: EventDateRange;
+  /** Canonical event date used by both full and compact views. */
+  date: EventDate;
+  /** Main event title as shown in the list. */
   title: string;
+  /**
+   * Full location string.
+   *
+   * Pattern: prefer `Venue, City, Country 🇳🇱` or `City, Country 🇳🇱`
+   * so compact view can safely derive `City + Flag` from it.
+   */
   location: string;
-  note?: string | EventNoteItem[];
+  /** Optional grouped plans inside the main event/trip. */
+  details?: EventDetail[];
 };
+
+const viewMode = ref<"full" | "compact">("full");
 
 const events: EventItem[] = [
   {
-    dates: "Apr 18",
+    date: { start: { month: "Apr", day: 18 } },
     title: "Puppy Social + After Dark @ The Boots 💶 🏩",
     location: "The Boots, Antwerp, Belgium 🇧🇪",
   },
   {
-    dates: "Apr 25",
+    date: { start: { month: "Apr", day: 25 } },
     title: "Cage & Key 🏩",
     location: "La Réserve, Brussels, Belgium 🇧🇪",
   },
   {
-    dates: "May 2",
+    date: { start: { month: "May", day: 2 } },
     title: "Bark & Play",
     location: "Danscafé Marcus-Antonius, Nijmegen, The Netherlands 🇳🇱",
   },
   {
-    dates: "May 9",
+    date: { start: { month: "May", day: 9 } },
     title: "Tails & Leashes 💶",
     location: "The Boots, Antwerp, Belgium 🇧🇪",
   },
   {
-    dates: "May 23",
+    date: { start: { month: "May", day: 23 } },
     title: "XGEAR: Pride Edition 💶 🏩",
     location: "Motorworld Zeche Ewald, Herten, Germany 🇩🇪",
   },
   {
-    dates: "May 30",
+    date: { start: { month: "May", day: 30 } },
     title: "Gear Factory 💶",
     location: "Grenswerk, Venlo, The Netherlands 🇳🇱",
   },
   // {
-  //   dates: "Jun 27",
+  //   date: { start: { month: "Jun", day: 27 } },
   //   title: "Pride Maastricht OR Caged @ Eagle Amsterdam",
   //   location: "🇳🇱",
   // },
   {
-    dates: {
+    date: {
       start: { month: "Jul", day: 3 },
       end: { month: "Jul", day: 5 },
     },
     title: "Pride Festival Cologne (CSD) 🏩",
     location: "Cologne, Germany 🇩🇪",
-    note: [
+    details: [
       { title: "CSD Street Festival" },
       { title: "Play With GuyZ 💶", dates: "Jul 3", location: "Schrotty" },
       { title: "Sexy Universe 💶", dates: "Jul 4", location: "MMC Studios" },
@@ -81,7 +97,7 @@ const events: EventItem[] = [
     ],
   },
   {
-    dates: {
+    date: {
       start: { month: "Jul", day: 10 },
       end: { month: "Jul", day: 12 },
     },
@@ -89,18 +105,18 @@ const events: EventItem[] = [
     location: "Amsterdam, The Netherlands 🇳🇱",
   },
   {
-    dates: "Jul 18",
+    date: { start: { month: "Jul", day: 18 } },
     title: "MoG Gear Rave 💶 🏩",
     location: "Solothurn, Switzerland 🇨🇭",
   },
   {
-    dates: {
+    date: {
       start: { month: "Jul", day: 25 },
       end: { month: "Aug", day: 8 },
     },
     title: "World Pride Amsterdam 🏩",
     location: "Amsterdam, The Netherlands 🇳🇱",
-    note: [
+    details: [
       { dates: "Jul 25", title: "Pride March & Pride Park" },
       {
         dates: "Jul 31, Aug 1",
@@ -116,18 +132,18 @@ const events: EventItem[] = [
     ],
   },
   // {
-  //   dates: "Aug 8",
+  //   date: { start: { month: "Aug", day: 8 } },
   //   title: "Puppy Park",
   //   location: "Mannheim, Germany 🇩🇪",
   // },
   {
-    dates: {
+    date: {
       start: { month: "Sep", day: 4 },
       end: { month: "Sep", day: 14 },
     },
     title: "Folsom Europe",
     location: "Berlin, Germany 🇩🇪",
-    note: [
+    details: [
       {
         title: "Animalz Folsom 💶",
         dates: "Sep 12",
@@ -140,51 +156,91 @@ const events: EventItem[] = [
   },
 ];
 
-function dateMonth(dates: EventItem["dates"]) {
-  if (typeof dates === "string") {
-    return dates.split(" ")[0];
-  }
+const eventCards = computed(() =>
+  events.map((event) => {
+    const detailsCount = event.details?.length ?? 0;
 
-  return dates.start.month;
+    return {
+      ...event,
+      key: `${dateKey(event.date)}-${event.title}`,
+      monthLabel: dateMonth(event.date),
+      dayLabel: dateDays(event.date),
+      dateLabel: fullDateLabel(event.date),
+      spilloverMonth: dateSpilloverMonth(event.date),
+      hasDateValue: hasDateValue(event.date),
+      compactLocation: compactLocation(event.location),
+      compactSummary:
+        detailsCount > 0
+          ? `${detailsCount} ${detailsCount === 1 ? "plan" : "plans"} inside`
+          : null,
+    };
+  }),
+);
+
+function dateMonth(date: EventItem["date"]) {
+  return date.start.month;
 }
 
-function dateDays(dates: EventItem["dates"]) {
-  if (typeof dates === "string") {
-    return dates.split(" ")[1]?.replace(",", "") || "TBA";
+function dateDays(date: EventItem["date"]) {
+  if (!date.start.day) {
+    return "TBA";
   }
 
-  if (
-    dates.start.day === dates.end.day &&
-    dates.start.month === dates.end.month
-  ) {
-    return `${dates.start.day}`;
+  if (!date.end?.day) {
+    return `${date.start.day}`;
   }
 
-  return `${dates.start.day}–${dates.end.day}`;
+  if (date.start.day === date.end.day && date.start.month === date.end.month) {
+    return `${date.start.day}`;
+  }
+
+  return `${date.start.day}–${date.end.day}`;
 }
 
-function dateSpilloverMonth(dates: EventItem["dates"]) {
-  if (typeof dates === "string" || dates.start.month === dates.end.month) {
+function fullDateLabel(date: EventItem["date"]) {
+  if (!date.start.day) {
+    return `${date.start.month} TBA`;
+  }
+
+  if (!date.end?.day) {
+    return `${date.start.month} ${date.start.day}`;
+  }
+
+  if (date.start.month === date.end.month) {
+    return `${date.start.month} ${date.start.day}–${date.end.day}`;
+  }
+
+  return `${date.start.month} ${date.start.day}–${date.end.month} ${date.end.day}`;
+}
+
+function dateSpilloverMonth(date: EventItem["date"]) {
+  if (!date.end || date.start.month === date.end.month) {
     return null;
   }
 
-  return dates.end.month;
+  return date.end.month;
 }
 
-function hasDateValue(dates: EventItem["dates"]) {
-  if (typeof dates === "string") {
-    return Boolean(dates.split(" ")[1]);
-  }
-
-  return true;
+function hasDateValue(date: EventItem["date"]) {
+  return Boolean(date.start.day);
 }
 
-function dateKey(dates: EventItem["dates"]) {
-  if (typeof dates === "string") {
-    return dates;
+function dateKey(date: EventItem["date"]) {
+  return `${date.start.month}-${date.start.day ?? "tba"}-${date.end?.month ?? "same"}-${date.end?.day ?? "same"}`;
+}
+
+function compactLocation(location: string) {
+  const parts = location.split(",").map((part) => part.trim());
+
+  if (parts.length === 1) {
+    return location;
   }
 
-  return `${dates.start.month}-${dates.start.day}-${dates.end.month}-${dates.end.day}`;
+  const city = parts.at(-2) ?? parts[0];
+  const countryWithFlag = parts.at(-1) ?? "";
+  const flag = countryWithFlag.split(" ").at(-1) ?? "";
+
+  return /[\u{1F1E6}-\u{1F1FF}]/u.test(flag) ? `${city} ${flag}` : city;
 }
 </script>
 
@@ -206,49 +262,77 @@ function dateKey(dates: EventItem["dates"]) {
       </nav>
 
       <section class="mb-5 px-1">
-        <h1 class="title is-4 mb-2">Upcoming Events</h1>
-        <p class="small-note">
-          Petting encouraged. consequences unknown
-          <span class="needs-contrast">🐾</span>
-          <br />
-          * 💶 — ticket secured
-          <br />
-          * 🏩 — looking for hotel mates
-        </p>
+        <div class="event-heading-row mb-3">
+          <div>
+            <h1 class="title is-4 mb-2">Upcoming Events</h1>
+            <p class="small-note mb-0">
+              Petting encouraged. consequences unknown
+              <span class="needs-contrast">🐾</span>
+              <br />
+              * 💶 — ticket secured
+              <br />
+              * 🏩 — looking for hotel mates
+            </p>
+          </div>
+
+          <div class="is-align-items-center">
+            <div class="has-text-grey-dark mb-1">View:</div>
+
+            <div
+              class="tabs is-toggle is-toggle-rounded view-toggle is-small is-fullwidth"
+            >
+              <ul>
+                <li :class="{ 'is-active': viewMode === 'full' }">
+                  <a href="#" @click.prevent="viewMode = 'full'">
+                    <span>Full</span>
+                  </a>
+                </li>
+                <li :class="{ 'is-active': viewMode === 'compact' }">
+                  <a href="#" @click.prevent="viewMode = 'compact'">
+                    <span>Compact</span>
+                  </a>
+                </li>
+              </ul>
+            </div>
+          </div>
+        </div>
       </section>
 
-      <div class="is-flex is-flex-direction-column">
+      <div
+        :class="
+          viewMode === 'full'
+            ? 'is-flex is-flex-direction-column'
+            : 'event-list'
+        "
+      >
         <article
-          v-for="event in events"
-          :key="`${dateKey(event.dates)}-${event.title}`"
-          class="card event-card"
+          v-for="event in eventCards"
+          :key="event.key"
+          :class="viewMode === 'full' ? 'card event-card' : 'event-list-row'"
         >
-          <div class="card-content p-5">
+          <div v-if="viewMode === 'full'" class="card-content p-5">
             <div class="event-layout">
               <div
                 class="event-date-badge"
-                :class="{ 'is-spillover': dateSpilloverMonth(event.dates) }"
+                :class="{ 'is-spillover': event.spilloverMonth }"
                 aria-label="Event date"
               >
                 <span
                   class="event-date-month has-background-primary has-text-white"
                 >
-                  {{ dateMonth(event.dates) }}
+                  {{ event.monthLabel }}
                 </span>
                 <span
                   class="event-date-day has-background-light"
                   :class="{
-                    'has-text-grey-light is-size-6': !hasDateValue(event.dates),
-                    'has-text-dark': hasDateValue(event.dates),
+                    'has-text-grey-light is-size-6': !event.hasDateValue,
+                    'has-text-dark': event.hasDateValue,
                   }"
                 >
-                  {{ dateDays(event.dates) }}
+                  {{ event.dayLabel }}
                 </span>
-                <span
-                  v-if="dateSpilloverMonth(event.dates)"
-                  class="event-date-spillover"
-                >
-                  ✸{{ dateSpilloverMonth(event.dates) }}
+                <span v-if="event.spilloverMonth" class="event-date-spillover">
+                  ✸{{ event.spilloverMonth }}
                 </span>
               </div>
 
@@ -256,10 +340,10 @@ function dateKey(dates: EventItem["dates"]) {
                 <h2 class="title is-5 mb-1">{{ event.title }}</h2>
                 <p class="has-text-info-80">{{ event.location }}</p>
 
-                <div v-if="event.note" class="event-notes mt-2">
-                  <dl v-if="Array.isArray(event.note)" class="event-note-list">
+                <div v-if="event.details?.length" class="event-notes mt-2">
+                  <dl class="event-note-list">
                     <div
-                      v-for="item in event.note"
+                      v-for="item in event.details"
                       :key="`${item.dates ?? 'note'}-${item.title}`"
                       class="event-note-item"
                     >
@@ -277,12 +361,27 @@ function dateKey(dates: EventItem["dates"]) {
                       </dd>
                     </div>
                   </dl>
-
-                  <p v-else class="small-note mb-0">{{ event.note }}</p>
                 </div>
               </div>
             </div>
           </div>
+
+          <template v-else>
+            <div class="event-list-copy">
+              <h2 class="title is-6 mb-1">{{ event.title }}</h2>
+              <p class="small-note mb-0">{{ event.compactLocation }}</p>
+              <p
+                v-if="event.compactSummary"
+                class="small-note mb-0 event-compact-summary"
+              >
+                {{ event.compactSummary }}
+              </p>
+            </div>
+
+            <div class="event-list-date event-compact-date">
+              {{ event.dateLabel }}
+            </div>
+          </template>
         </article>
       </div>
 

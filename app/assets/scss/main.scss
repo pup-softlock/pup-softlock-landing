@@ -117,6 +117,22 @@ h6 {
   color: rgba(238, 242, 255, 0.76);
 }
 
+.event-heading-row {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 0.75rem;
+}
+
+.view-toggle {
+  margin-bottom: 0 !important;
+}
+
+.view-toggle .button {
+  min-width: 5.5rem;
+}
+
 .event-layout {
   display: flex;
   align-items: flex-start;
@@ -174,6 +190,50 @@ h6 {
   align-self: center;
 }
 
+.event-list {
+  display: grid;
+  gap: 0.85rem;
+}
+
+.event-list-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+  padding-bottom: 0.85rem;
+  border-bottom: 1px solid rgba(148, 163, 184, 0.12);
+}
+
+.event-list-row:last-child {
+  padding-bottom: 0;
+  border-bottom: none;
+}
+
+.event-list-copy {
+  min-width: 0;
+}
+
+.event-list-date {
+  flex-shrink: 0;
+  padding: 0.2rem 0.55rem;
+  border-radius: 9999px;
+  background: rgba(232, 84, 143, 0.14);
+  color: #ffd3e8;
+  font-size: 0.72rem;
+  font-weight: 700;
+  letter-spacing: 0.04em;
+  white-space: nowrap;
+}
+
+.event-compact-summary {
+  margin-top: 0.2rem;
+  color: rgba(201, 236, 255, 0.8);
+}
+
+.event-compact-date {
+  font-size: 0.68rem;
+}
+
 .event-date {
   display: inline-block;
   font-size: 0.72rem;
@@ -207,41 +267,6 @@ h6 {
   font-size: 0.72rem;
   font-weight: 700;
   letter-spacing: 0.04em;
-}
-
-.past-event-list {
-  display: grid;
-  gap: 0.85rem;
-}
-
-.past-event-row {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  gap: 1rem;
-  padding-bottom: 0.85rem;
-  border-bottom: 1px solid rgba(148, 163, 184, 0.12);
-}
-
-.past-event-row:last-child {
-  padding-bottom: 0;
-  border-bottom: none;
-}
-
-.past-event-copy {
-  min-width: 0;
-}
-
-.past-event-date {
-  flex-shrink: 0;
-  padding: 0.2rem 0.55rem;
-  border-radius: 9999px;
-  background: rgba(232, 84, 143, 0.14);
-  color: #ffd3e8;
-  font-size: 0.72rem;
-  font-weight: 700;
-  letter-spacing: 0.04em;
-  white-space: nowrap;
 }
 
 .tabs ul {
@@ -286,4 +311,8 @@ h6 {
 .tags-negative-horizontal-margin {
   margin-left: -1.25rem;
   margin-right: -1.25rem;
+}
+
+.is-fullwidth {
+  width: 100%;
 }

@@ -105,20 +105,20 @@ const pastEventGroups: PastEventYearGroup[] = [
               }}
             </h2>
 
-            <div class="past-event-list">
+            <div class="event-list">
               <article
                 v-for="item in group.items"
                 :key="`${group.year}-${item.title}-${item.dates}`"
-                class="past-event-row"
+                class="event-list-row"
               >
-                <div class="past-event-copy">
+                <div class="event-list-copy">
                   <h3 class="has-text-weight-semibold mb-0">
                     {{ item.title }}
                   </h3>
                   <p class="small-note mb-0">{{ item.location }}</p>
                 </div>
 
-                <div class="past-event-date">{{ item.dates }}</div>
+                <div class="event-list-date">{{ item.dates }}</div>
               </article>
             </div>
           </div>
