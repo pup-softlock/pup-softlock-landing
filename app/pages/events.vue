@@ -298,7 +298,7 @@ function dateKey(dates: EventItem["dates"]) {
         >
 
         <NuxtLink to="/" class="button is-fullwidth is-text mt-3"
-          >← Back to profile</NuxtLink
+          >← Back to Profile</NuxtLink
         >
       </div>
     </div>

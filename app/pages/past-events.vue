@@ -126,7 +126,7 @@ const pastEventGroups: PastEventYearGroup[] = [
       </div>
 
       <NuxtLink to="/events" class="button is-text mt-4 is-fullwidth is-medium"
-        >← Back to upcoming events</NuxtLink
+        >← Back to Upcoming Events</NuxtLink
       >
     </div>
   </main>
