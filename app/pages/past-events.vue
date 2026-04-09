@@ -1,68 +1,12 @@
 <script setup lang="ts">
+import { PAST_EVENTS } from "~/data/past-events";
+import type { PastEventYearGroup } from "~/types/past-events";
+
 useSeoMeta({
   title: "Past Events",
   description:
     "A small archive of places where pup Softlock has been spotted before.",
 });
-
-type PastEvent = {
-  title: string;
-  location: string;
-  dates: string;
-};
-
-type PastEventYearGroup = {
-  year: string;
-  items: PastEvent[];
-};
-
-const pastEventGroups: PastEventYearGroup[] = [
-  {
-    year: "2026",
-    items: [
-      {
-        title: "The Darknight",
-        location: "Liège 🇧🇪",
-        dates: "Apr",
-      },
-      {
-        title: "Bark & Play",
-        location: "Nijmegen 🇳🇱",
-        dates: "Mar",
-      },
-      {
-        title: "Beyond Darklands",
-        location: "Antwerp 🇧🇪",
-        dates: "Mar",
-      },
-    ],
-  },
-  {
-    year: "2025",
-    items: [
-      {
-        title: "Bark & Play",
-        location: "Nijmegen 🇳🇱",
-        dates: "Sep",
-      },
-      {
-        title: "Folsom Europe",
-        location: "Berlin 🇩🇪",
-        dates: "Aug",
-      },
-      {
-        title: "Woof & Wander",
-        location: "Maastricht 🇳🇱",
-        dates: "Aug",
-      },
-      {
-        title: "Bark & Play",
-        location: "Nijmegen 🇳🇱",
-        dates: "Jul",
-      },
-    ],
-  },
-];
 </script>
 
 <template>
@@ -88,13 +32,10 @@ const pastEventGroups: PastEventYearGroup[] = [
       </section>
 
       <div class="is-flex is-flex-direction-column">
-        <section
-          v-for="(group, groupIndex) in pastEventGroups"
-          :key="group.year"
-        >
+        <section v-for="(group, groupIndex) in PAST_EVENTS" :key="group.year">
           <div
             :class="{
-              'mb-6': groupIndex !== pastEventGroups.length - 1,
+              'mb-6': groupIndex !== PAST_EVENTS.length - 1,
             }"
           >
             <h2 class="title is-5 mb-4 has-text-primary">
