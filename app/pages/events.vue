@@ -83,6 +83,22 @@ const events: EventItem[] = [
   //   title: "Pride Maastricht OR Caged @ Eagle Amsterdam",
   //   location: "🇳🇱",
   // },
+
+  {
+    date: { start: { month: "Jun", day: 6 } },
+    title: "Gear'n'Dance",
+    location: "Eloria, Bottrop, Germany 🇩🇪",
+  },
+  {
+    date: { start: { month: "Jun", day: 20 } },
+    title: "Woof & Wander",
+    location: "Café Rose, Maastricht, The Netherlands 🇳🇱",
+    details: [
+      {
+        title: "If I can grab a ticket 🥲",
+      },
+    ],
+  },
   {
     date: {
       start: { month: "Jul", day: 3 },

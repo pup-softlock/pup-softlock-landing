@@ -204,8 +204,9 @@ h6 {
   padding-bottom: 0.85rem;
 }
 .event-list > .event-list-row,
-.event-list > .event-list-item {
+.event-list > .event-list-item:not(.card) {
   border-bottom: 1px solid rgba(148, 163, 184, 0.12);
+  padding-bottom: 0.85rem;
 }
 
 .event-list > .event-list-row:last-child,
