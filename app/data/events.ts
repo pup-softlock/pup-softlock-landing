@@ -57,7 +57,7 @@ export const EVENTS: EventItem[] = [
       start: { month: "Jul", day: 3 },
       end: { month: "Jul", day: 5 },
     },
-    title: "Pride Festival Cologne (CSD) 🏩",
+    title: "Pride Festival Cologne (CSD)",
     location: "Cologne, Germany 🇩🇪",
     details: [
       { title: "CSD Street Festival" },
@@ -87,7 +87,11 @@ export const EVENTS: EventItem[] = [
     title: "World Pride Amsterdam 🏩",
     location: "Amsterdam, The Netherlands 🇳🇱",
     details: [
-      { dates: "Jul 25", title: "Pride March & Pride Park" },
+      {
+        dates: "Jul 25",
+        title: "Milkshake Festival 💶",
+        location: "Westerpark",
+      },
       {
         dates: "Jul 31, Aug 1",
         title: "Pup Zone at Crash",
@@ -123,5 +127,10 @@ export const EVENTS: EventItem[] = [
         title: "I need ideas what else to do during that whole stay in Berlin",
       },
     ],
+  },
+  {
+    date: { start: { month: "Sep", day: 26 } },
+    title: "XperienceReady2Kink 💶 🏩",
+    location: "IJland, Amsterdam, The Netherlands 🇳🇱",
   },
 ];
