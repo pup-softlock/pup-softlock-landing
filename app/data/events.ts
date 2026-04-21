@@ -2,14 +2,19 @@ import type { EventItem } from "~/types/events";
 
 export const EVENTS: EventItem[] = [
   {
-    date: { start: { month: "Apr", day: 18 } },
-    title: "Puppy Social + After Dark @ The Boots 💶 🏩",
+    date: { start: { month: "Apr", day: 24 } },
+    title: "Mr Fetish Boots (Day 1)",
     location: "The Boots, Antwerp, Belgium 🇧🇪",
   },
   {
     date: { start: { month: "Apr", day: 25 } },
     title: "Cage & Key 🏩",
     location: "La Réserve, Brussels, Belgium 🇧🇪",
+  },
+  {
+    date: { start: { month: "Apr", day: 26 } },
+    title: "Mr Fetish Boots (Day 3)",
+    location: "The Boots, Antwerp, Belgium 🇧🇪",
   },
   {
     date: { start: { month: "May", day: 2 } },
@@ -19,6 +24,11 @@ export const EVENTS: EventItem[] = [
   {
     date: { start: { month: "May", day: 9 } },
     title: "Tails & Leashes 💶",
+    location: "The Boots, Antwerp, Belgium 🇧🇪",
+  },
+  {
+    date: { start: { month: "May", day: 13 } },
+    title: "Fetish Night",
     location: "The Boots, Antwerp, Belgium 🇧🇪",
   },
   {
