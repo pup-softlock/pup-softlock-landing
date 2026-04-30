@@ -5,6 +5,16 @@ export const PAST_EVENTS: PastEventYearGroup[] = [
     year: "2026",
     items: [
       {
+        title: "Puppy Night @ Babylon Sauna",
+        location: "Cologne 🇩🇪",
+        dates: "Apr",
+      },
+      {
+        title: "Cage & Key",
+        location: "Brussels 🇧🇪",
+        dates: "Apr",
+      },
+      {
         title: "Puppy Social + After Dark",
         location: "Antwerp 🇧🇪",
         dates: "Apr",

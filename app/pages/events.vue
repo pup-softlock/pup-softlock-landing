@@ -8,7 +8,7 @@ useSeoMeta({
     "Where to find pup Softlock in the wild. Upcoming events, parties and socials.",
 });
 
-const viewMode = ref<"full" | "compact">("full");
+const viewMode = ref<"full" | "compact">("compact");
 const expandedEventIndex = ref<number | null>(null);
 
 const eventCards = computed(() =>
