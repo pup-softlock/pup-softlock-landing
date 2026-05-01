@@ -34,8 +34,8 @@ export const EVENTS: EventItem[] = [
 
   {
     date: { start: { month: "Jun", day: 6 } },
-    title: "Gear'n'Dance",
-    location: "Eloria, Bottrop, Germany 🇩🇪",
+    title: "Gear & Groove",
+    location: "The Boots, Antwerp, Belgium 🇧🇪",
   },
   {
     date: { start: { month: "Jun", day: 20 } },
