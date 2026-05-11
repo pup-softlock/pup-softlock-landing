@@ -2,19 +2,14 @@ import type { EventItem } from "~/types/events";
 
 export const EVENTS: EventItem[] = [
   {
-    date: { start: { month: "May", day: 2 } },
-    title: "Bark & Play",
-    location: "Danscafé Marcus-Antonius, Nijmegen, The Netherlands 🇳🇱",
-  },
-  {
-    date: { start: { month: "May", day: 9 } },
-    title: "Tails & Leashes 💶",
-    location: "The Boots, Antwerp, Belgium 🇧🇪",
-  },
-  {
     date: { start: { month: "May", day: 13 } },
     title: "Fetish Night",
     location: "The Boots, Antwerp, Belgium 🇧🇪",
+  },
+  {
+    date: { start: { month: "May", day: 16 } },
+    title: "Brussels Pride",
+    location: "Brussels, Belgium 🇧🇪",
   },
   {
     date: { start: { month: "May", day: 23 } },
@@ -23,8 +18,8 @@ export const EVENTS: EventItem[] = [
   },
   {
     date: { start: { month: "May", day: 30 } },
-    title: "Gear Factory 💶",
-    location: "Grenswerk, Venlo, The Netherlands 🇳🇱",
+    title: "Mr Puppy Boots",
+    location: "The Boots, Antwerp, Belgium 🇧🇪",
   },
   // {
   //   date: { start: { month: "Jun", day: 27 } },
