@@ -2,45 +2,29 @@ import type { EventItem } from "~/types/events";
 
 export const EVENTS: EventItem[] = [
   {
-    date: { start: { month: "May", day: 13 } },
-    title: "Fetish Night",
+    date: { start: { month: "May", day: 29 } },
+    title: "Puppies in the Dark",
     location: "The Boots, Antwerp, Belgium 🇧🇪",
-  },
-  {
-    date: { start: { month: "May", day: 16 } },
-    title: "Brussels Pride",
-    location: "Brussels, Belgium 🇧🇪",
-  },
-  {
-    date: { start: { month: "May", day: 23 } },
-    title: "XGEAR: Pride Edition 💶 🏩",
-    location: "Motorworld Zeche Ewald, Herten, Germany 🇩🇪",
   },
   {
     date: { start: { month: "May", day: 30 } },
     title: "Mr Puppy Boots",
     location: "The Boots, Antwerp, Belgium 🇧🇪",
   },
-  // {
-  //   date: { start: { month: "Jun", day: 27 } },
-  //   title: "Pride Maastricht OR Caged @ Eagle Amsterdam",
-  //   location: "🇳🇱",
-  // },
-
   {
     date: { start: { month: "Jun", day: 6 } },
     title: "Gear & Groove",
     location: "The Boots, Antwerp, Belgium 🇧🇪",
   },
   {
+    date: { start: { month: "Jun", day: 15 } },
+    title: "Puppy Evening: BBQ 💶",
+    location: "Liège, Belgium 🇧🇪",
+  },
+  {
     date: { start: { month: "Jun", day: 20 } },
-    title: "Woof & Wander",
+    title: "Woof & Wander 💶",
     location: "Café Rose, Maastricht, The Netherlands 🇳🇱",
-    details: [
-      {
-        title: "If I can grab a ticket 🥲",
-      },
-    ],
   },
   {
     date: {
@@ -56,27 +40,25 @@ export const EVENTS: EventItem[] = [
       { title: "Naughty 💶", dates: "Jul 5", location: "Nachtflug" },
     ],
   },
-  {
-    date: {
-      start: { month: "Jul", day: 10 },
-      end: { month: "Jul", day: 12 },
-    },
-    title: "Pup Weekend",
-    location: "Amsterdam, The Netherlands 🇳🇱",
-  },
-  {
-    date: { start: { month: "Jul", day: 18 } },
-    title: "MoG Gear Rave 💶 🏩",
-    location: "Solothurn, Switzerland 🇨🇭",
-  },
+  // Not sure if I wanna go to MoG so far away...
+  // {
+  //   date: { start: { month: "Jul", day: 18 } },
+  //   title: "MoG Gear Rave 💶 🏩",
+  //   location: "Solothurn, Switzerland 🇨🇭",
+  // },
   {
     date: {
       start: { month: "Jul", day: 25 },
       end: { month: "Aug", day: 8 },
     },
-    title: "World Pride Amsterdam 🏩",
+    title: "World Pride Amsterdam",
     location: "Amsterdam, The Netherlands 🇳🇱",
     details: [
+      {
+        dates: "Jul 25",
+        title: "National Walkies",
+        location: "Dam Square",
+      },
       {
         dates: "Jul 25",
         title: "Milkshake Festival 💶",
@@ -92,8 +74,17 @@ export const EVENTS: EventItem[] = [
         title: "WorldPride Village (not sure about that one yet)",
         location: "Museumplein",
       },
-      { dates: "Aug 8", title: "World Puppy and Furry Walk" },
+      // {
+      //   dates: "Aug 8",
+      //   title: "World Puppy and Furry Walk",
+      //   location: "Martin Luther King Park",
+      // },
     ],
+  },
+  {
+    date: { start: { month: "Aug", day: 8 } },
+    title: "Either Pride Antwerp, or Puppy Park, or World Puppy and Furry Walk",
+    location: "Antwerp 🇧🇪 / Mannheim 🇩🇪 / Amsterdam 🇳🇱",
   },
   // {
   //   date: { start: { month: "Aug", day: 8 } },

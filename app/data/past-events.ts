@@ -1,12 +1,34 @@
 import type { PastEventYearGroup } from "~/types/past-events";
 
+/**
+ * Past events only include title, city and flag, and month of the event.
+ *
+ * When we move events from the upcoming events to the past events, we strip away all the extra details.
+ *
+ * @example
+ * {
+ *   title: "Brussels Pride",
+ *   location: "Brussels 🇧🇪",
+ *   dates: "May",
+ * }
+ */
 export const PAST_EVENTS: PastEventYearGroup[] = [
   {
     year: "2026",
     items: [
       {
+        title: "XGEAR: Pride Edition",
+        location: "Herten 🇩🇪",
+        dates: "May",
+      },
+      {
+        title: "Brussels Pride",
+        location: "Brussels 🇧🇪",
+        dates: "May",
+      },
+      {
         title: "Tails & Leashes",
-        location: "The Boots, Antwerp 🇧🇪",
+        location: "Antwerp 🇧🇪",
         dates: "May",
       },
       {
