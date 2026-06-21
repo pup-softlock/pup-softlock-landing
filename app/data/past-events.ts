@@ -17,6 +17,26 @@ export const PAST_EVENTS: PastEventYearGroup[] = [
     year: "2026",
     items: [
       {
+        title: "Woof & Wander",
+        location: "Café Rose, Maastricht 🇳🇱",
+        dates: "Jun",
+      },
+      {
+        title: "Gear & Groove",
+        location: "The Boots, Antwerp 🇧🇪",
+        dates: "Jun",
+      },
+      {
+        title: "Mr Puppy Boots",
+        location: "The Boots, Antwerp 🇧🇪",
+        dates: "May",
+      },
+      {
+        title: "Puppies in the Dark",
+        location: "The Boots, Antwerp 🇧🇪",
+        dates: "May",
+      },
+      {
         title: "XGEAR: Pride Edition",
         location: "Herten 🇩🇪",
         dates: "May",

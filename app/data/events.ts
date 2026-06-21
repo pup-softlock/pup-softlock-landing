@@ -2,31 +2,6 @@ import type { EventItem } from "~/types/events";
 
 export const EVENTS: EventItem[] = [
   {
-    date: { start: { month: "May", day: 29 } },
-    title: "Puppies in the Dark",
-    location: "The Boots, Antwerp, Belgium 🇧🇪",
-  },
-  {
-    date: { start: { month: "May", day: 30 } },
-    title: "Mr Puppy Boots",
-    location: "The Boots, Antwerp, Belgium 🇧🇪",
-  },
-  {
-    date: { start: { month: "Jun", day: 6 } },
-    title: "Gear & Groove",
-    location: "The Boots, Antwerp, Belgium 🇧🇪",
-  },
-  {
-    date: { start: { month: "Jun", day: 15 } },
-    title: "Puppy Evening: BBQ 💶",
-    location: "Liège, Belgium 🇧🇪",
-  },
-  {
-    date: { start: { month: "Jun", day: 20 } },
-    title: "Woof & Wander 💶",
-    location: "Café Rose, Maastricht, The Netherlands 🇳🇱",
-  },
-  {
     date: {
       start: { month: "Jul", day: 3 },
       end: { month: "Jul", day: 5 },
@@ -83,14 +58,17 @@ export const EVENTS: EventItem[] = [
   },
   {
     date: { start: { month: "Aug", day: 8 } },
-    title: "Either Pride Antwerp, or Puppy Park, or World Puppy and Furry Walk",
-    location: "Antwerp 🇧🇪 / Mannheim 🇩🇪 / Amsterdam 🇳🇱",
+    title: "Pride Antwerp",
+    location: "Antwerp, Belgium 🇧🇪",
   },
-  // {
-  //   date: { start: { month: "Aug", day: 8 } },
-  //   title: "Puppy Park",
-  //   location: "Mannheim, Germany 🇩🇪",
-  // },
+  {
+    date: {
+      start: { month: "Aug", day: 14 },
+      end: { month: "Aug", day: 16 },
+    },
+    title: "XGEAR: Summer Edition",
+    location: "Herten, Germany 🇩🇪",
+  },
   {
     date: {
       start: { month: "Sep", day: 4 },
