@@ -117,6 +117,15 @@ h6 {
   color: rgba(238, 242, 255, 0.76);
 }
 
+.event-legend-rule {
+  width: 3em;
+  height: 1px;
+  margin: 0 0 0.5rem;
+  border: 0;
+  background: currentColor;
+  opacity: 0.6;
+}
+
 .event-heading-row {
   display: flex;
   flex-wrap: wrap;

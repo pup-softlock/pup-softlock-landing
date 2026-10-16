@@ -139,12 +139,6 @@ function compactLocation(location: string) {
             <p class="small-note mb-0">
               Petting encouraged. consequences unknown
               <span class="needs-contrast">🐾</span>
-              <template v-if="eventCards.length">
-                <br />
-                * 💶 — ticket secured
-                <br />
-                * 🏩 — looking for hotel mates
-              </template>
             </p>
           </div>
 
@@ -289,6 +283,17 @@ function compactLocation(location: string) {
       </div> -->
 
       <div class="is-flex is-flex-direction-column mt-5">
+        <div
+          v-if="eventCards.length"
+          class="event-legend has-text-grey-light is-size-7 px-1 mb-3"
+        >
+          <hr class="event-legend-rule">
+          <ul aria-label="Event symbols">
+            <li>💶 — ticket secured</li>
+            <li>🏩 — looking for hotel mates</li>
+          </ul>
+        </div>
+
         <NuxtLink
           to="/past-events"
           class="button is-fullwidth is-text mb-0 is-medium"
