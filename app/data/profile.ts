@@ -24,7 +24,7 @@ export const PROFILE = {
   location: "Venlo, Netherlands",
   relationships: "Married to my keyholder · Beta to Pup Erin",
   puppyhood:
-    "Puppy play isn't just something I do at parties. It's part of my identity, my sexuality, and how I see myself. My puppy face is my true face. 🐶",
+    "Puppy play is part of my identity, my sexuality, and how I see myself. My puppy face is my true face. 🐶",
   adventures:
     "I love puppy parties: meeting other pups, making friends, and occasionally finding myself tied up somewhere.",
   chastity: {

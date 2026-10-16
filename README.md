@@ -1,75 +1,51 @@
-# Nuxt Content Starter
+# Pup Softlock
 
-Look at the [Nuxt Content documentation](https://content.nuxt.com) to learn more.
+Personal landing page and social navigation hub for Pup Softlock.
 
-## Setup
+**Website:** [pup-softlock.nl](https://pup-softlock.nl)
 
-Make sure to install dependencies:
+Built with Nuxt 4, Vue 3, TypeScript, and Bulma/Sass. Ark UI for Vue is also installed. Pages are rendered to static HTML for GitHub Pages.
 
-```bash
-# npm
-npm install
+## Pages
 
-# pnpm
-pnpm install
+- `/` — Profile, social links, interests, and a one-time 18+ chastity reveal.
+- `/events` — Upcoming events, with compact and full views.
+- `/past-events` — Past attendance, grouped by year.
+- `/llms.txt` — Public profile context and links for AI agents.
 
-# yarn
-yarn install
+## Development
 
-# bun
-bun install
-```
-
-## Development Server
-
-Start the development server on `http://localhost:3000`:
+Install dependencies and start the local server:
 
 ```bash
-# npm
+npm ci
 npm run dev
-
-# pnpm
-pnpm dev
-
-# yarn
-yarn dev
-
-# bun
-bun run dev
 ```
 
-## Production
+Open [localhost:3000](http://localhost:3000).
 
-Build the application for production:
+## Validation and Build
 
 ```bash
-# npm
+npm run lint
+npm run typecheck
 npm run build
-
-# pnpm
-pnpm build
-
-# yarn
-yarn build
-
-# bun
-bun run build
 ```
 
-Locally preview production build:
+Both `npm run build` and `npm run generate` produce the static site in `.output/public/`.
 
-```bash
-# npm
-npm run preview
+## Editing Content
 
-# pnpm
-pnpm preview
+- [app/data/profile.ts](app/data/profile.ts) — Profile copy, social destinations, interest tags, and optional stories. Set a story's `enabled` flag to temporarily hide or restore it.
+- [app/data/events.ts](app/data/events.ts) — Upcoming events, listed chronologically.
+- [app/data/past-events.ts](app/data/past-events.ts) — Past events grouped by year.
+- [app/pages/index.vue](app/pages/index.vue) — Profile layout, reveal behavior, and SEO metadata.
+- [app/assets/scss/main.scss](app/assets/scss/main.scss) — Bulma configuration and shared styling.
+- [public/llms.txt](public/llms.txt) — AI-facing profile context. Keep it in sync with profile wording and social platform descriptions.
+- `public/` — Profile images, the party hero photo, and other static assets.
 
-# yarn
-yarn preview
+Use AP-style title case for headings. Keep Instagram as the primary content platform and Bluesky identified as specifically for 18+ content.
 
-# bun
-bun run preview
-```
+## Deployment
 
-Check out the [deployment documentation](https://nuxt.com/docs/getting-started/deployment) for more information.
+[The GitHub Pages workflow](.github/workflows/nuxtjs.yml) builds and deploys `.output/public/` when changes are pushed to `master`. It can also be run manually from GitHub Actions.
