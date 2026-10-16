@@ -29,8 +29,12 @@ export const PROFILE = {
     "I love puppy parties: meeting other pups, making friends, and occasionally finding myself tied up somewhere. It's really the people and the experiences that make them special.",
   chastity: {
     label: "Permanent, Keyholder-Controlled Chastity",
-    content:
-      "Being locked is my normal state. Even when the cage comes off, chastity doesn't. Masturbation is a rare treat. Orgasms even more so.",
+    content: [
+      "Being locked is my normal state. Chastity isn't just something I practice during play — it's part of my everyday life and my identity as a submissive puppy.",
+      "My husband is my keyholder. The cage can come off, but chastity doesn't. Being uncaged doesn't automatically mean I can masturbate, and masturbation doesn't automatically mean I can orgasm.",
+      "And no, chastity doesn't mean celibacy! I still love playing, teasing, and being kept horny. For me, it's about the containment, the anticipation, the frustration, and giving up control over when I get relief.",
+    ],
+    emphasis: "Masturbation is a rare treat. Orgasms even more so.",
   },
 };
 

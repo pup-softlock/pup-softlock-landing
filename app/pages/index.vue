@@ -213,9 +213,12 @@ useHead({
                 </span>
                 <span class="spoiler-hint">Tap to Reveal</span>
               </summary>
-              <p class="profile-chastity-copy" tabindex="-1">
-                {{ PROFILE.chastity.content }}
-              </p>
+              <div class="profile-chastity-copy" tabindex="-1">
+                <p v-for="paragraph in PROFILE.chastity.content" :key="paragraph">
+                  {{ paragraph }}
+                </p>
+                <p><strong>{{ PROFILE.chastity.emphasis }}</strong></p>
+              </div>
             </details>
           </section>
         </div>
