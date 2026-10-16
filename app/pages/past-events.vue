@@ -1,6 +1,5 @@
 <script setup lang="ts">
 import { PAST_EVENTS } from "~/data/past-events";
-import type { PastEventYearGroup } from "~/types/past-events";
 
 useSeoMeta({
   title: "Past Events",

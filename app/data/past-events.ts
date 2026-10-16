@@ -17,6 +17,36 @@ export const PAST_EVENTS: PastEventYearGroup[] = [
     year: "2026",
     items: [
       {
+        title: "Tails & Leashes",
+        location: "The Boots, Antwerp 🇧🇪",
+        dates: "Sep",
+      },
+      {
+        title: "Folsom Europe",
+        location: "Berlin 🇩🇪",
+        dates: "Sep",
+      },
+      {
+        title: "XGEAR: Summer Edition",
+        location: "Herten 🇩🇪",
+        dates: "Aug",
+      },
+      {
+        title: "Pride Antwerp",
+        location: "Antwerp 🇧🇪",
+        dates: "Aug",
+      },
+      {
+        title: "World Pride Amsterdam",
+        location: "Amsterdam 🇳🇱",
+        dates: "Jul–Aug",
+      },
+      {
+        title: "Pride Festival Cologne (CSD)",
+        location: "Cologne 🇩🇪",
+        dates: "Jul",
+      },
+      {
         title: "Woof & Wander",
         location: "Café Rose, Maastricht 🇳🇱",
         dates: "Jun",

@@ -139,14 +139,16 @@ function compactLocation(location: string) {
             <p class="small-note mb-0">
               Petting encouraged. consequences unknown
               <span class="needs-contrast">🐾</span>
-              <br />
-              * 💶 — ticket secured
-              <br />
-              * 🏩 — looking for hotel mates
+              <template v-if="eventCards.length">
+                <br />
+                * 💶 — ticket secured
+                <br />
+                * 🏩 — looking for hotel mates
+              </template>
             </p>
           </div>
 
-          <div class="is-align-items-center">
+          <div v-if="eventCards.length" class="is-align-items-center">
             <div class="has-text-grey-dark mb-1">View:</div>
 
             <div
@@ -170,6 +172,7 @@ function compactLocation(location: string) {
       </section>
 
       <div
+        v-if="eventCards.length"
         :class="
           viewMode === 'full'
             ? 'is-flex is-flex-direction-column'
@@ -278,6 +281,8 @@ function compactLocation(location: string) {
           </button>
         </article>
       </div>
+
+      <p v-else class="small-note px-1">No upcoming events announced yet.</p>
 
       <!-- <div class="box is-shadowless info-strip mt-5">
         <p class="mb-0">DM on Instagram</p>
