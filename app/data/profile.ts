@@ -24,13 +24,13 @@ export const PROFILE = {
   location: "Venlo, Netherlands",
   relationships: "Married to my keyholder · Beta to Pup Erin",
   puppyhood:
-    "Puppy play isn't just something I do at parties. It's part of my identity, my sexuality, and how I see myself. The hood makes it visible, but the puppy doesn't disappear when I take it off. 🐶",
+    "Puppy play isn't just something I do at parties. It's part of my identity, my sexuality, and how I see myself. My puppy face is my true face. 🐶",
   adventures:
-    "I love puppy parties: meeting other pups, making friends, and occasionally finding myself tied up somewhere. It's really the people and the experiences that make them special.",
+    "I love puppy parties: meeting other pups, making friends, and occasionally finding myself tied up somewhere.",
   chastity: {
     label: "Permanent, Keyholder-Controlled Chastity",
     content: [
-      "Being locked is my normal state. Chastity isn't just something I practice during play — it's part of my everyday life and my identity as a submissive puppy.",
+      "Being locked is my normal state. Chastity is part of my everyday life and my identity as a submissive puppy.",
       "My husband is my keyholder. The cage can come off, but chastity doesn't. Being uncaged doesn't automatically mean I can masturbate, and masturbation doesn't automatically mean I can orgasm.",
       "And no, chastity doesn't mean celibacy! I still love playing, teasing, and being kept horny. For me, it's about the containment, the anticipation, the frustration, and giving up control over when I get relief.",
     ],
