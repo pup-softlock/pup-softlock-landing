@@ -26,7 +26,7 @@ export const PROFILE = {
   puppyhood:
     "Puppy play isn't just something I do at parties. It's part of my identity, my sexuality, and how I see myself. The hood makes it visible, but the puppy doesn't disappear when I take it off. 🐶",
   adventures:
-    "I love puppy parties: meeting other pups, making friends, getting into ridiculous situations, and occasionally finding myself tied up somewhere. It's really the people and the experiences that make them special. 😆",
+    "I love puppy parties: meeting other pups, making friends, and occasionally finding myself tied up somewhere. It's really the people and the experiences that make them special.",
   chastity: {
     label: "Permanent, Keyholder-Controlled Chastity",
     content:
@@ -87,7 +87,7 @@ export const PROFILE_STORIES: ProfileStory[] = [
     id: "speculative-fiction",
     label: "🤖 Speculative Kink Fiction",
     placement: "interests",
-    enabled: true,
+    enabled: false, // Temporarily hidden; keep the approved text for later.
     content: [
       "I have a peculiar fascination with sci-fi fantasies about permanent chastity, AI governance, body augmentation, and technology-assisted submission. I also enjoy building entire fictional worlds and governance systems around these ideas. Apparently, inventing a bureaucracy dedicated to keeping a puppy contained is a perfectly reasonable creative hobby. 😆",
     ],

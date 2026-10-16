@@ -16,7 +16,6 @@ const interests: ProfileTagContent[] = [
   ...PROFILE_MATERIALS.map((label) => ({
     id: label.toLowerCase(),
     label,
-    prominent: true,
   })),
 ];
 const interestStories = PROFILE_STORIES.filter(
@@ -24,6 +23,23 @@ const interestStories = PROFILE_STORIES.filter(
 );
 
 const profileImageUrl = new URL(PROFILE.image, PROFILE.url).href;
+
+function preserveChastityHeight(event: MouseEvent) {
+  const summary = event.currentTarget as HTMLElement;
+  const disclosure = summary.closest("details");
+  if (disclosure && !disclosure.open) {
+    disclosure.style.minHeight = `${disclosure.getBoundingClientRect().height}px`;
+  }
+}
+
+function onChastityReveal(event: Event) {
+  const disclosure = event.currentTarget as HTMLDetailsElement;
+  if (disclosure.open) {
+    disclosure
+      .querySelector<HTMLElement>(".profile-chastity-copy")
+      ?.focus({ preventScroll: true });
+  }
+}
 
 useSeoMeta({
   title: PROFILE.title,
@@ -189,7 +205,18 @@ useHead({
             <h2 id="chastity-label" class="profile-section-title">
               {{ PROFILE.chastity.label }}
             </h2>
-            <p class="profile-chastity-copy">{{ PROFILE.chastity.content }}</p>
+            <details class="profile-chastity-spoiler" @toggle="onChastityReveal">
+              <summary @click="preserveChastityHeight">
+                <span class="spoiler-label">
+                  <span role="img" aria-label="18+">🔞</span>
+                  <span>What Does It Mean?</span>
+                </span>
+                <span class="spoiler-hint">Tap to Reveal</span>
+              </summary>
+              <p class="profile-chastity-copy" tabindex="-1">
+                {{ PROFILE.chastity.content }}
+              </p>
+            </details>
           </section>
         </div>
       </article>
