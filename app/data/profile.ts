@@ -20,9 +20,9 @@ export const PROFILE = {
   title: "Pup Softlock | Gay Human Pup, Chastity & Puppy Play",
   description:
     "Meet Pup Softlock, a gay submissive human pup from Venlo, Netherlands. Permanent chastity, puppy adventures, bondage, tails, and speculative kink fiction.",
-  identity: "Gay · Submissive human pup",
+  identity: "Submissive human pup",
   location: "Venlo, Netherlands",
-  relationships: "Married to my keyholder · Beta to Pup Erin 🐾",
+  relationships: "Married to my keyholder · Beta to Pup Erin",
   puppyhood:
     "Puppy play isn't just something I do at parties. It's part of my identity, my sexuality, and how I see myself. The hood makes it visible, but the puppy doesn't disappear when I take it off. 🐶",
   adventures:
@@ -72,16 +72,10 @@ export const PROFILE_INTERESTS: ProfileTag[] = [
   {
     id: "tails",
     emoji: "🐾",
-    label: "Tails",
+    label: "Plug tails",
     prominent: true,
   },
   { id: "bondage", emoji: "⛓️", label: "Bondage & BDSM" },
-  {
-    id: "toys",
-    emoji: "😇",
-    label: "Toys",
-    prominent: true,
-  },
   { id: "e-stim", emoji: "⚡", label: "E-stim" },
   { id: "parties", emoji: "🎉", label: "Fetish parties" },
 ];

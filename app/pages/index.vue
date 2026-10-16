@@ -112,19 +112,24 @@ useHead({
         </div>
         <div class="card-content profile-content">
           <header class="profile-identity">
-            <div>
-              <h1
-                id="profile-name"
-                class="title is-3 has-text-primary has-text-centered mb-2"
-              >
-                {{ PROFILE.name }}
-              </h1>
-              <p class="profile-subtitle">{{ PROFILE.identity }}</p>
-              <p class="profile-location small-note mt-1">
-                <span aria-hidden="true">📍</span> {{ PROFILE.location }}
+            <h1
+              id="profile-name"
+              class="title is-3 has-text-primary has-text-centered mb-0"
+            >
+              {{ PROFILE.name }}
+            </h1>
+            <div class="profile-meta">
+              <p class="profile-meta-row profile-subtitle">
+                <span class="profile-meta-icon" role="img" aria-label="Gay">🌈</span>
+                <span class="profile-meta-text">{{ PROFILE.identity }}</span>
               </p>
-              <p class="profile-relationships small-note mt-2">
-                {{ PROFILE.relationships }}
+              <p class="profile-meta-row profile-location small-note">
+                <span class="profile-meta-icon" aria-hidden="true">📍</span>
+                <span class="profile-meta-text">{{ PROFILE.location }}</span>
+              </p>
+              <p class="profile-meta-row profile-relationships small-note">
+                <span class="profile-meta-icon needs-contrast" aria-hidden="true">🐾</span>
+                <span class="profile-meta-text">{{ PROFILE.relationships }}</span>
               </p>
             </div>
           </header>
