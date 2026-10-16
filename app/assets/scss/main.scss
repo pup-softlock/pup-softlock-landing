@@ -344,3 +344,217 @@ h6 {
 .is-fullwidth {
   width: 100%;
 }
+
+// Keep the wider profile and its interactions independent of the Events layout.
+.profile-frame {
+  width: min(100%, 40rem);
+}
+
+.profile-content {
+  padding: clamp(1.25rem, 4vw, 2rem);
+  text-wrap: pretty;
+}
+
+.profile-identity {
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
+  gap: 1rem;
+
+  .avatar-wrap {
+    flex-shrink: 0;
+    width: 128px;
+    height: 128px;
+    margin: 0 auto;
+  }
+
+  .title {
+    font-weight: 600;
+  }
+}
+
+.profile-subtitle {
+  color: #f3eaf1;
+  font-size: 0.95rem;
+}
+
+.profile-intro {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr);
+  justify-items: start;
+  gap: 0.375rem;
+  margin: 0.875rem 0 0;
+  font-size: 0.875rem;
+
+  > li {
+    max-width: 100%;
+  }
+}
+
+.profile-intro-line {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  color: #eee4ec;
+  text-align: left;
+  line-height: 1.5;
+
+  .intro-emoji {
+    width: 1.25rem;
+    flex-shrink: 0;
+    text-align: center;
+  }
+}
+
+.profile-location,
+.profile-relationships {
+  font-size: 0.875rem;
+  line-height: 1.5;
+}
+
+.profile-socials {
+  margin-top: 1.25rem;
+}
+
+.profile-copy {
+  margin-top: 0.875rem;
+  color: #e6dfe8;
+  line-height: 1.65;
+}
+
+.profile-section {
+  margin-top: 1rem;
+  padding-top: 1rem;
+  border-top: 1px solid rgba(148, 163, 184, 0.14);
+}
+
+.profile-section-title {
+  margin-bottom: 0.5rem;
+  color: #f8edf3;
+  font-size: 1rem;
+  font-weight: 600;
+  line-height: 1.5;
+}
+
+.profile-chastity-copy {
+  color: #e6dfe8;
+  font-size: 0.875rem;
+  line-height: 1.65;
+}
+
+.profile-interest-tags {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 0.25rem 0.5rem;
+
+  > li {
+    display: flex;
+    align-items: center;
+    min-height: 2.75rem;
+  }
+}
+
+.profile-tag {
+  display: inline-flex;
+  gap: 0;
+  flex-wrap: nowrap;
+
+  .tag {
+    margin-bottom: 0;
+  }
+
+  .tag:first-child {
+    background: #252a37;
+  }
+
+  &.is-prominent .tag.is-dark {
+    background: #302130;
+    color: #ffd3e8;
+    font-weight: 600;
+  }
+}
+
+.profile-disclosure {
+  margin-top: 0.35rem;
+
+  > summary {
+    display: flex;
+    width: fit-content;
+    align-items: center;
+    gap: 0.5rem;
+    min-height: 2.75rem;
+    border-radius: 0.25rem;
+    color: #bddef8;
+    font-size: 0.875rem;
+    line-height: 1.5;
+    list-style: none;
+    cursor: pointer;
+
+    &::-webkit-details-marker {
+      display: none;
+    }
+
+    > span {
+      text-decoration: underline dotted rgba(189, 222, 248, 0.55);
+      text-underline-offset: 0.3em;
+    }
+
+    &:hover {
+      color: #ffd3e8;
+    }
+  }
+
+  &[open] .disclosure-indicator {
+    transform: rotate(180deg);
+  }
+}
+
+.disclosure-indicator {
+  flex-shrink: 0;
+  transition: transform 150ms ease;
+}
+
+.profile-disclosure-content {
+  padding: 0.25rem 0 0.5rem;
+  color: #cbd0dc;
+  font-size: 0.875rem;
+  line-height: 1.65;
+  overflow-wrap: anywhere;
+}
+
+.profile-fiction > summary {
+  color: #ffd3e8;
+  font-weight: 600;
+}
+
+.profile-page :is(a, button, summary):focus-visible,
+nav.tabs[aria-label="Primary"] a:focus-visible {
+  outline: 2px solid #7dd3fc;
+  outline-offset: 4px;
+}
+
+nav.tabs[aria-label="Primary"] {
+  --bulma-tabs-toggle-link-active-background-color: #33202e;
+  --bulma-tabs-toggle-link-active-color: #ffd3e8;
+  --bulma-tabs-toggle-link-active-border-color: #944766;
+}
+
+@media (max-width: 479px) {
+  .profile-identity {
+    > div {
+      min-width: 0;
+    }
+
+    .title {
+      font-size: clamp(1.5rem, 7vw, 1.75rem);
+    }
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .profile-page * {
+    animation: none !important;
+    transition: none !important;
+  }
+}

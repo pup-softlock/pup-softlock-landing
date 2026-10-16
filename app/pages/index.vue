@@ -1,66 +1,86 @@
 <script setup lang="ts">
+import ProfileDisclosure from "~/components/ProfileDisclosure.vue";
+import ProfileTag from "~/components/ProfileTag.vue";
+import {
+  PROFILE,
+  PROFILE_INTERESTS,
+  PROFILE_INTRO,
+  PROFILE_MATERIALS,
+  PROFILE_STORIES,
+  SOCIAL_LINKS,
+} from "~/data/profile";
+import type { ProfileTag as ProfileTagContent } from "~/data/profile";
+
+const interests: ProfileTagContent[] = [
+  ...PROFILE_INTERESTS,
+  ...PROFILE_MATERIALS.map((label) => ({
+    id: label.toLowerCase(),
+    label,
+    prominent: true,
+  })),
+];
+const interestStories = PROFILE_STORIES.filter(
+  (story) => story.enabled && story.placement === "interests",
+);
+
+const profileImageUrl = new URL(PROFILE.image, PROFILE.url).href;
+
 useSeoMeta({
-  title: "",
-  description: "Horny locked puppy. Venlo, NL",
+  title: PROFILE.title,
+  description: PROFILE.description,
+  ogTitle: PROFILE.title,
+  ogDescription: PROFILE.description,
+  ogType: "profile",
+  ogUrl: PROFILE.url,
+  ogImage: profileImageUrl,
+  ogImageAlt: "Pup Softlock in his black and pink puppy hood",
+  twitterTitle: PROFILE.title,
+  twitterDescription: PROFILE.description,
+  twitterImage: profileImageUrl,
+  twitterImageAlt: "Pup Softlock in his black and pink puppy hood",
 });
 
-type SocialLink = {
-  label: string;
-  href: string;
-  handle: string;
-  tone: string;
-};
-
-const socialLinks: SocialLink[] = [
-  {
-    label: "Instagram",
-    href: "https://instagram.com/pup_softlock",
-    handle: "@pup_softlock",
-    tone: "is-primary",
-  },
-  {
-    label: "Bluesky 🔞",
-    href: "https://bsky.app/profile/pup-softlock.bsky.social",
-    handle: "@pup-softlock.bsky.social",
-    tone: "is-primary is-light",
-  },
-  // {
-  //   label: "Twitter / X",
-  //   href: "https://x.com/examplecreator",
-  //   handle: "@examplecreator",
-  //   tone: "is-dark",
-  // },
-];
-
-type Tag = {
-  emoji: string;
-  label: string;
-  emojiTagClass?: string;
-};
-
-const tags: Tag[] = [
-  { emoji: "🔒", label: "Locked" },
-  { emoji: "⛓️", label: "Bondage Lover" },
-  { emoji: "🏳️‍🌈", label: "Gay" },
-  {
-    emoji: "🖤",
-    label: "Latex, Silicone, Neoprene",
-    emojiTagClass: "needs-contrast",
-  },
-  { emoji: "🤗", label: "Ok to Touch" },
-];
+useHead({
+  titleTemplate: null,
+  link: [
+    { rel: "canonical", href: PROFILE.url },
+    {
+      rel: "describedby",
+      type: "text/plain",
+      href: new URL("llms.txt", PROFILE.url).href,
+    },
+  ],
+  script: [
+    {
+      type: "application/ld+json",
+      innerHTML: JSON.stringify({
+        "@context": "https://schema.org",
+        "@type": "ProfilePage",
+        url: PROFILE.url,
+        mainEntity: {
+          "@type": "Person",
+          name: PROFILE.name,
+          description: PROFILE.description,
+          url: PROFILE.url,
+          image: profileImageUrl,
+          sameAs: SOCIAL_LINKS.map((link) => link.href),
+        },
+      }),
+    },
+  ],
+});
 </script>
 
 <template>
-  <main class="page-shell">
-    <div class="mobile-frame">
+  <main class="page-shell profile-page">
+    <div class="mobile-frame profile-frame">
       <nav
         class="tabs is-toggle is-fullwidth is-medium mb-5"
         aria-label="Primary"
       >
         <ul>
           <li class="is-active">
-            <NuxtLink to="/">Profile</NuxtLink>
+            <NuxtLink to="/" aria-current="page">Profile</NuxtLink>
           </li>
           <li>
             <NuxtLink to="/events">Events</NuxtLink>
@@ -68,72 +88,95 @@ const tags: Tag[] = [
         </ul>
       </nav>
 
-      <section class="card profile-card">
-        <div class="card-content p-5">
-          <div class="has-text-centered mb-5">
+      <article class="card profile-card" aria-labelledby="profile-name">
+        <div class="card-content profile-content">
+          <header class="profile-identity">
             <figure class="avatar-wrap">
               <img
-                src="/pup_softlock_profile_picture.jpeg"
-                alt="Pup Softlock profile picture: a person in a black and pink neoprene puppy hood and a thick leather collar with white lettering 'SOFTLOCK'. Pink harness straps are visible over the shoulders"
+                :src="PROFILE.image"
+                alt="Pup Softlock wearing a black and pink puppy hood, a collar with SOFTLOCK lettering, and pink harness straps"
+                width="128"
+                height="128"
                 loading="eager"
-              />
-            </figure>
-
-            <h1 class="title is-4 has-text-weight-bold has-text-primary mb-5">
-              Pup Softlock
-            </h1>
-            <div
-              class="tags mb-2 is-justify-content-center tags-negative-horizontal-margin"
-            >
-              <div
-                v-for="tag in tags"
-                :key="tag.label"
-                class="tags has-addons mb-0"
+                fetchpriority="high"
               >
-                <div :class="['tag is-rounded', tag.emojiTagClass]">
-                  {{ tag.emoji }}
-                </div>
-                <div class="tag is-dark is-rounded">{{ tag.label }}</div>
-              </div>
+            </figure>
+            <div>
+              <h1
+                id="profile-name"
+                class="title is-3 has-text-primary has-text-centered mb-2"
+              >
+                {{ PROFILE.name }}
+              </h1>
+              <p class="profile-subtitle">{{ PROFILE.identity }}</p>
+              <p class="profile-location small-note mt-1">
+                <span aria-hidden="true">📍</span> {{ PROFILE.location }}
+              </p>
+              <p class="profile-relationships small-note mt-2">
+                {{ PROFILE.relationships }}
+              </p>
             </div>
-            <div class="tag is-rounded mb-4">📍 Venlo, The Netherlands</div>
+          </header>
 
-            <!-- <p class="small-note">
-              Tiny bio goes here. Share what you make, what you love, and the
-              sort of energy people can expect when they follow along.
-            </p> -->
-          </div>
+          <ul class="profile-intro">
+            <li v-for="line in PROFILE_INTRO" :key="line.id">
+              <ProfileTag :tag="line" appearance="text" />
+            </li>
+          </ul>
 
-          <!-- <div class="box is-shadowless info-strip mb-5">
-            <p class="is-size-7 has-text-weight-semibold mb-2">CURRENTLY</p>
-            <p class="mb-0">
-             Something something
-            </p>
-          </div> -->
-
-          <div class="buttons are-medium">
-            <a
-              v-for="link in socialLinks"
-              :key="link.label"
-              :href="link.href"
-              class="button is-fullwidth is-rounded link-button"
-              :class="link.tone"
-              target="_blank"
-              rel="noreferrer"
+          <nav class="profile-socials" aria-label="Social profiles and events">
+            <div class="buttons are-medium">
+              <a
+                v-for="link in SOCIAL_LINKS"
+                :key="link.label"
+                :href="link.href"
+                class="button is-fullwidth is-rounded link-button"
+                :class="link.tone"
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                <span>{{ link.label }}</span>
+                <span class="is-size-7">{{ link.handle }}</span>
+              </a>
+            </div>
+            <NuxtLink
+              to="/events"
+              class="button is-fullwidth is-white is-outlined is-medium is-rounded mt-3"
             >
-              <span>{{ link.label }}</span>
-              <span class="is-size-7">{{ link.handle }}</span>
-            </a>
-          </div>
+              Meet Me at Events <span aria-hidden="true" class="ml-2">→</span>
+            </NuxtLink>
+          </nav>
+          <p class="profile-copy profile-adventures-copy">
+            {{ PROFILE.adventures }}
+          </p>
 
-          <NuxtLink
-            to="/events"
-            class="button is-fullwidth is-white is-outlined is-medium is-rounded mt-3"
-          >
-            Meet Me at Events →
-          </NuxtLink>
+          <p class="profile-copy profile-puppy-copy">{{ PROFILE.puppyhood }}</p>
+
+          <section class="profile-section" aria-labelledby="interests-label">
+            <h2 id="interests-label" class="profile-section-title mb-3">
+              Things That Make My Tail Wag
+            </h2>
+            <ul class="profile-interest-tags">
+              <li v-for="tag in interests" :key="tag.id">
+                <ProfileTag :tag="tag" />
+              </li>
+            </ul>
+            <ProfileDisclosure
+              v-for="story in interestStories"
+              :key="story.id"
+              :story="story"
+              class="profile-fiction"
+            />
+          </section>
+
+          <section class="profile-section" aria-labelledby="chastity-label">
+            <h2 id="chastity-label" class="profile-section-title">
+              {{ PROFILE.chastity.label }}
+            </h2>
+            <p class="profile-chastity-copy">{{ PROFILE.chastity.content }}</p>
+          </section>
         </div>
-      </section>
+      </article>
     </div>
   </main>
 </template>
