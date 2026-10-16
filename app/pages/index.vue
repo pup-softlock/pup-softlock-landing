@@ -89,18 +89,29 @@ useHead({
       </nav>
 
       <article class="card profile-card" aria-labelledby="profile-name">
+        <div class="profile-hero">
+          <img
+            class="profile-hero-photo"
+            src="/softlock-party-hero.webp"
+            alt=""
+            aria-hidden="true"
+            width="1200"
+            height="1600"
+            loading="eager"
+          >
+          <figure class="avatar-wrap">
+            <img
+              :src="PROFILE.image"
+              alt="Pup Softlock wearing a black and pink puppy hood, a collar with SOFTLOCK lettering, and pink harness straps"
+              width="144"
+              height="144"
+              loading="eager"
+              fetchpriority="high"
+            >
+          </figure>
+        </div>
         <div class="card-content profile-content">
           <header class="profile-identity">
-            <figure class="avatar-wrap">
-              <img
-                :src="PROFILE.image"
-                alt="Pup Softlock wearing a black and pink puppy hood, a collar with SOFTLOCK lettering, and pink harness straps"
-                width="128"
-                height="128"
-                loading="eager"
-                fetchpriority="high"
-              >
-            </figure>
             <div>
               <h1
                 id="profile-name"
